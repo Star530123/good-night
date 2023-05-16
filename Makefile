@@ -4,3 +4,15 @@ build:
 
 up:
 	docker-compose up -d rails
+
+stop:
+	docker-compose stop
+
+restart:
+	docker-compose restart
+
+down:
+	docker-compose down
+
+console:
+	docker-compose exec rails bin/rails console
