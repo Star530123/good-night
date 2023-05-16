@@ -10,7 +10,7 @@ module Error
 
     def standard_error(e)
       render json: {
-        error: e.error,
+        error: :standard_error,
         status: 500,
         message: e.to_s
       }, status: 500
