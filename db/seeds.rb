@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+User.insert_all([
+    { name: 'YuXing' },
+    { name: 'Star'  },
+    { name: 'Simon' }
+  ])
+
+pp 'Finish'
