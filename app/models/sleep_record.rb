@@ -10,4 +10,5 @@
 #  updated_at :datetime         not null
 #
 class SleepRecord < ApplicationRecord
+  belongs_to :user
 end
