@@ -1,6 +1,6 @@
 class SleepController < ApplicationController
   def clock_in
-    user = User.find_by!(id: clock_in_params)
+    user = User.find_by!(id: clock_in_param)
     sleep_record = user.sleep_records.last
     raise "You haven't clocked out!" if sleep_record && sleep_record.clock_out.nil?
 
@@ -9,7 +9,7 @@ class SleepController < ApplicationController
   end
 
   def clock_out
-    user = User.find_by!(id: clock_in_params)
+    user = User.find_by!(id: clock_out_param)
     sleep_record = user.sleep_records.last
     raise "You haven't clocked in!" if sleep_record.nil? || sleep_record.clock_in.nil?
     raise 'You have clocked out!' if sleep_record.clock_out.present?
@@ -20,11 +20,11 @@ class SleepController < ApplicationController
 
   private
 
-  def clock_in_params
+  def clock_in_param
     params.require(:user_id)
   end
 
-  def clock_out_params
+  def clock_out_param
     params.require(:user_id)
   end
 end
