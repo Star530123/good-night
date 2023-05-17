@@ -9,6 +9,7 @@
 #
 class User < ApplicationRecord
   has_many :sleep_records
-  has_many :followers, class_name: 'Follower', foreign_key: 'following_user_id', dependent: :destroy
-  has_many :following_users, class_name: 'Follower', foreign_key: 'follower_id', dependent: :destroy
+
+  has_many :follow_data, class_name: 'Follower', dependent: :destroy
+  has_many :following_users, through: :follow_data
 end

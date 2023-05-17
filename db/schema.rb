@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_16_100359) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_17_105437) do
   create_table "followers", charset: "utf8mb3", force: :cascade do |t|
-    t.bigint "follower_id", null: false
+    t.bigint "user_id", null: false
     t.bigint "following_user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["follower_id", "following_user_id"], name: "index_followers_on_follower_id_and_following_user_id", unique: true
+    t.index ["user_id", "following_user_id"], name: "index_followers_on_user_id_and_following_user_id", unique: true
   end
 
   create_table "sleep_records", charset: "utf8mb3", force: :cascade do |t|
