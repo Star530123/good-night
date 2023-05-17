@@ -1,7 +1,7 @@
 build:
 	docker-compose build
 	docker-compose up -d rails
-	docker-compose run --rm rails bundle exec rake db:drop db:create
+	docker-compose run --rm rails bundle exec rake db:drop db:create db:seed
 
 up:
 	docker-compose up -d rails
@@ -23,3 +23,4 @@ bash:
 
 migrate:
 	docker-compose exec rails bin/rails db:migrate
+	docker-compose exec rails annotate --models
