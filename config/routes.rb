@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'sleep/clocked_in_times', to: 'sleep#clocked_in_times'
   post 'users/follow', to: 'users#follow'
   post 'users/unfollow', to: 'users#unfollow'
+  get 'sleep/following_user_records', to: 'sleep#following_user_records'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
