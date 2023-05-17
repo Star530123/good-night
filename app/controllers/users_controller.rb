@@ -1,4 +1,13 @@
 class UsersController < ApplicationController
+  def index
+    render json: User.all.select(:id, :name), status: :ok
+  end
+
+  def create
+    user = User.create!(name: create_user_params[:name])
+    render json: user.as_json(only: [:id, :name]), status: :ok
+  end
+
   def follow
     user = User.find_by!(id: follow_params[:user_id])
     following_user = User.find_by!(id: follow_params[:following_user_id])
@@ -20,6 +29,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def create_user_params
+    params.permit(:name)
+  end
 
   def follow_params
     params.permit(:user_id, :following_user_id)
