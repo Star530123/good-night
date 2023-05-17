@@ -15,7 +15,11 @@ class SleepController < ApplicationController
     raise 'You have clocked out!' if sleep_record.clock_out.present?
 
     sleep_record.update!(clock_out: Time.now)
-    render json: { clock_in: sleep_record.clock_in, clock_out: sleep_record.clock_out }, status: :ok
+    render json: { 
+      clock_in: sleep_record.clock_in, 
+      clock_out: sleep_record.clock_out,
+      sleep_length: sleep_record.format_sleep_length
+    }, status: :ok
   end
 
   def clocked_in_times

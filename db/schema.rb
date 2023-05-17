@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_17_105437) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_17_120619) do
   create_table "followers", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "following_user_id", null: false
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_105437) do
     t.bigint "user_id", null: false
     t.datetime "clock_in", precision: nil, null: false
     t.datetime "clock_out", precision: nil
+    t.integer "sleep_length_seconds"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
