@@ -59,7 +59,7 @@ class SleepController < ApplicationController
       {
         clock_in: sleep_record.clock_in,
         clock_out: sleep_record.clock_out,
-        sleep_length: sleep_record.format_sleep_length
+        sleep_length: Utils::Time.elapsed_time_format(sleep_record.sleep_length_seconds)
       }
     end
 

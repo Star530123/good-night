@@ -15,12 +15,6 @@ class SleepRecord < ApplicationRecord
 
   before_save :calculate_sleep_length, if: :clock_in_and_out?
 
-  def format_sleep_length
-    return '00:00:00' unless sleep_length_seconds
-
-    Time.at(sleep_length_seconds).utc.strftime('%H:%M:%S')
-  end
-
   private
 
   def clock_in_and_out?
