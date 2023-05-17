@@ -18,6 +18,21 @@ class SleepController < ApplicationController
     render json: { clock_in: sleep_record.clock_in, clock_out: sleep_record.clock_out }, status: :ok
   end
 
+  def clocked_in_times
+    user = User.find_by!(id: user_id_from_param)
+    sleep_records = user.sleep_records.order(created_at: :desc)
+      .map do |sleep_record|
+        {
+          clock_in: sleep_record.clock_in,
+          clock_out: sleep_record.clock_out
+        }
+    end
+    render json: {
+      user_id: user.id,
+      sleep_records: sleep_records 
+    }, status: :ok
+  end
+
   private
 
   def user_id_from_param
