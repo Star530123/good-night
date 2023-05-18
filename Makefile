@@ -24,3 +24,6 @@ bash:
 migrate:
 	docker-compose exec rails bin/rails db:migrate
 	docker-compose exec rails annotate --models
+
+run-test:
+	docker-compose exec rails rspec
