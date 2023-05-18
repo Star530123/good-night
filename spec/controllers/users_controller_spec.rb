@@ -1,13 +1,17 @@
 require 'rails_helper'
 
 describe UsersController, type: :request do
-  before { create(:user, name: 'Simon')}
+  let!(:user) { create(:user, name: 'Simon') }
 
   describe '#index' do
     it 'success' do
       get '/users'
 
       expect(response.status).to eq(200)
+      
+      result = JSON.parse(response.body)
+      expect(result.size).to eq(1)
+      expect(result[0]['name']).to eq('Simon')
     end
   end
 
@@ -19,6 +23,9 @@ describe UsersController, type: :request do
       post_api
 
       expect(response.status).to eq(200)
+      
+      result = JSON.parse(response.body)
+      expect(result['name']).to eq('YuXing')
     end
 
     context 'given incorrect parameter name: username' do
@@ -33,7 +40,6 @@ describe UsersController, type: :request do
   end
 
   describe '#follow' do
-    let(:user) { create(:user) }
     let(:following_user) { create(:user) }
     let(:params) { { user_id: user&.id, following_user_id: following_user&.id } }
     let(:post_api) { post '/users/follow', params: params }
@@ -70,7 +76,6 @@ describe UsersController, type: :request do
   end
 
   describe '#unfollow' do
-    let(:user) { create(:user) }
     let(:following_user) { create(:user) }
     let!(:follower) { create(:follower, user: user, following_user: following_user)}
     let(:params) { { user_id: user&.id, unfollow_user_id: following_user&.id } }
