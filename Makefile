@@ -25,7 +25,7 @@ restart: ## restart good-night service
 down: ## stop & remove good-night service
 	docker-compose down
 
-console: ## enter rails' console in the container
+console: ## enter rails container's irb
 	docker-compose exec rails bin/rails console
 
 bash: ## enter rails container's bash
