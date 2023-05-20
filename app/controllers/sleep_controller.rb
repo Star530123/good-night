@@ -5,15 +5,12 @@ class SleepController < ApplicationController
   end
 
   def clock_out
-    sleep_record = login_user.sleep_records.last
-    raise "You haven't clocked in!" if sleep_record.nil? || sleep_record.clock_out.present?
-
-    sleep_record.update!(clock_out: Time.now)
-    render json: { 
+    sleep_record = Sleep::ClockOutService.execute(user: login_user)
+    render json: {
       clock_in: sleep_record.clock_in,
       clock_out: sleep_record.clock_out,
       sleep_length: Utils::Time.elapsed_time_format(sleep_record.sleep_length_seconds)
-    }, status: :ok
+    }
   end
 
   def clocked_in_times
