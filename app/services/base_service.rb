@@ -1,7 +1,7 @@
 class BaseService
 
-  def self.execute(*args)
-    new(*args).execute
+  def self.execute(**args)
+    new(**args).execute
   end
 
   def execute
