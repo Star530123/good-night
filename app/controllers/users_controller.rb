@@ -20,11 +20,7 @@ class UsersController < ApplicationController
   end
 
   def unfollow
-    destroy_id = Follower.find_by(
-      user: login_user,
-      following_user_id: unfollow_params[:unfollow_user_id]
-    )&.id
-    Follower.destroy(destroy_id) if destroy_id
+    Users::UnfollowService.execute(user: login_user, unfollow_user_id: unfollow_params[:unfollow_user_id])
   end
 
   private
