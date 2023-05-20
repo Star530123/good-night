@@ -3,7 +3,7 @@ module SleepSharedMethods
 
   def following_user_records_response(user)
     {
-      id: user.id,
+      user_id: user.id,
       name: user.name,
       sleep_records: user.sleep_records.map(&method(:format_sleep_record))
     }
