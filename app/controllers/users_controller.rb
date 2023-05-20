@@ -1,22 +1,22 @@
 class UsersController < ApplicationController
   def index
-    render json: User.all.select(:id, :name), status: :ok
+    render json: User.all.select(:id, :name)
   end
 
   def create
     user = User.create!(name: create_user_params)
-    render json: user.as_json(only: [:id, :name]), status: :ok
+    render json: user.as_json(only: [:id, :name])
   end
 
   def follow
-    following_user = User.find_by!(id: follow_params[:following_user_id])
-    Follower.find_or_create_by!(user: login_user, following_user: following_user)
+    following_user_id = follow_params[:following_user_id]
+    Users::FollowService.execute(user: login_user, following_user_id: following_user_id)
     render json: {
       follower: {
         id: login_user.id,
-        following_user_id: following_user.id
+        following_user_id: following_user_id
       }
-    }, status: :ok
+    }
   end
 
   def unfollow
