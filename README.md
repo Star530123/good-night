@@ -6,8 +6,9 @@ let users track when they go to bed and when they wake up.
 - docker
 
 ## Getting started
-1. Execute command ```make build``` in the terminal, it will build docker images and initialize the project.
-2. ```make up``` will start the service.
+Execute command ```make build``` in the terminal, it will build docker images ,initialize the project, and start the good night service in the docker.
+
+There are other make commands. Most of them are aim to develop. You can use ```make help``` to see the all commands.
 
 ## API spec
 ### users api
