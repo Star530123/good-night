@@ -5,26 +5,15 @@ class SleepController < ApplicationController
   end
 
   def clock_out
-    sleep_record = Sleep::ClockOutService.execute(user: login_user)
-    render json: {
-      clock_in: sleep_record.clock_in,
-      clock_out: sleep_record.clock_out,
-      sleep_length: Utils::Time.elapsed_time_format(sleep_record.sleep_length_seconds)
-    }
+    render json: format_sleep_record(Sleep::ClockOutService.execute(user: login_user))
   end
 
   def clocked_in_times
-    sleep_records = login_user.sleep_records.order(created_at: :desc)
-      .map do |sleep_record|
-        {
-          clock_in: sleep_record.clock_in,
-          clock_out: sleep_record.clock_out
-        }
-    end
+    sleep_records = login_user.sleep_records.order(created_at: :desc).map(&method(:format_sleep_record))
     render json: {
       user_id: login_user.id,
-      sleep_records: sleep_records 
-    }, status: :ok
+      sleep_records: sleep_records
+    }
   end
 
   def following_user_records
@@ -41,14 +30,18 @@ class SleepController < ApplicationController
   private
 
   def following_user_records_response(user)
-    sleep_records = user.sleep_records.map do |sleep_record|
-      {
-        clock_in: sleep_record.clock_in,
-        clock_out: sleep_record.clock_out,
-        sleep_length: Utils::Time.elapsed_time_format(sleep_record.sleep_length_seconds)
-      }
-    end
+    {
+      id: user.id,
+      name: user.name,
+      sleep_records: user.sleep_records.map(&method(:format_sleep_record))
+    }
+  end
 
-    { id: user.id, name: user.name, sleep_records: sleep_records }
+  def format_sleep_record(record)
+    {
+      clock_in: record.clock_in,
+      clock_out: record.clock_out,
+      sleep_length: Utils::Time.elapsed_time_format(record.sleep_length_seconds)
+    }
   end
 end
