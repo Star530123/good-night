@@ -11,8 +11,7 @@ help: ## Show help message.
 build: ## build & initialize project
 	docker-compose build
 	docker-compose up -d rails
-	docker-compose run --rm rails bundle exec rake db:drop db:create db:seed
-	make migrate
+	docker-compose run --rm rails bundle exec rake db:drop db:create db:migrate db:seed
 
 up: ## create & start good-night service
 	docker-compose up -d rails
