@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     Users::FollowService.execute(user: login_user, following_user_id: following_user_id)
     render json: {
       follower: {
-        id: login_user.id,
+        user_id: login_user.id,
         following_user_id: following_user_id
       }
     }
