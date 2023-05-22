@@ -19,6 +19,6 @@ class SleepController < ApplicationController
   end
 
   def following_user_records
-    render json: { data: Sleep::FollowingUserRecordsService.execute(user: login_user) }
+    render json: { sleep_records: Sleep::FollowingUserRecordsService.execute(user: login_user) }
   end
 end

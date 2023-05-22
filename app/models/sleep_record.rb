@@ -14,6 +14,7 @@ class SleepRecord < ApplicationRecord
   belongs_to :user
 
   before_save :calculate_sleep_length, if: :clock_in_and_out?
+  scope :complete, -> { where.not(clock_out: nil) }
 
   private
 
