@@ -118,12 +118,12 @@ There are other make commands. Most of them are aim to develop. You can use ```m
 
     |  Parameter   |  Type  | Description |
     |  ----  | ----  | ---- |
-    | data |  object[] | Represent current users' friends' sleep records. (order by sleep length desc) |
-    | data[].user_id |  integer | following user id |
-    | data[].sleep_records |  object[] | The users' all sleep records. |
-    | sleep_records[].clock_in |  string | The user's clock in time. (go to sleep) |
-    | sleep_records[].clock_out |  string | The user's clock out time. (wake up) |
-    | sleep_records[].sleep_length |  string | The user's sleep length. Use ```HH:mm:ss``` to represent. |
+    | sleep_records |  object[] | Represent current users' friends' sleep records. (order by sleep length desc) |
+    | sleep_records[].user_id |  integer | Following user id |
+    | sleep_records[].name |  object[] | Following user name |
+    | sleep_records[].clock_in |  string | Following user's clock in time. (go to sleep) |
+    | sleep_records[].clock_out |  string | Following user's clock out time. (wake up) |
+    | sleep_records[].sleep_length |  string | Following user's sleep length. Use ```HH:mm:ss``` to represent. |
 
 ### postman api collection
 Here is the [postman collection](good-night.postman_collection.json) if needing to test. 
